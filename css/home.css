@@ -1,0 +1,101 @@
+@import url(general.css);
+.profile{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fefae0;
+    background-color: #606c38;
+    border-radius: 0px 0px 10px 10px;
+    padding: 15px;
+    display: flex;
+    margin: 0px auto;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    height: 60px;
+    transition: all 0.5s ease;
+     cursor: pointer;
+}
+.bottom-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+}
+.wallet, .home, .report{
+    display: flex;
+    flex-direction: column;    /* Stack icon and text vertically */
+    align-items: center;       /* Center horizontally */
+    justify-content: center; /* Icon stays at the top */
+    color: #fefae0;
+    background-color: #606c38;
+    border-radius: 10px 10px 0px 0px;
+    padding: 15px;
+    margin: 0px;
+    width: 30vw;
+    height: 60px;
+    position: relative;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+i{
+    font-size: 3em;
+    transition: transform 0.3s ease;
+}
+a{
+    text-decoration: none;
+    color: #fefae0;
+}
+/*.bottom-bar :hover{
+    background-color: #90b067;
+    transition: 0.5s;
+    padding: 50px;
+    height: 30vh;
+    display: flex;
+    align-items: flex-start;
+}*/
+.wallet:hover,
+.home:hover,
+.report:hover {
+    background-color: #90b0675e;
+    transition: 0.5s;
+    padding: 50px;
+    height: 30vh;
+    justify-content: flex-start;
+}   
+.profile:hover{
+    background-color: #90b0675e;
+    transition: 0.5s;
+    padding: 50px;
+    height: 30vh;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+.hidden-text {
+    display: none;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fefae0;
+    margin-top: 5px;
+}
+.profile:hover .username,
+.profile:hover .hidden-text,
+.wallet:hover .hidden-text,
+.home:hover .hidden-text,
+.report:hover .hidden-text {
+    display: block;
+    transition: opacity 0.3s ease-in-out;
+}
+.username {
+    display: none;
+    font-size: 1.2em;
+    color: #fefae0;
+    margin-bottom: 5px;
+    text-align: center;
+}
