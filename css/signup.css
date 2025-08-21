@@ -1,12 +1,21 @@
-body{
+/* Reset general */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body principal */
+body {
     width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: auto; /* Scroll global de toda la página */
     display: flex;
+    flex-direction: column; /* Para que todo crezca verticalmente */
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Desde arriba */
+    padding: 20px;
     background-image: url(../image/background.jpg);
     background-color: rgb(197, 195, 195);
     background-blend-mode: multiply;
@@ -14,13 +23,13 @@ body{
     background-repeat: no-repeat;
     background-position: right;
     background-attachment: fixed;
-    font-family: "Lato", serif, sans-serif; 
-  font-weight: 500;
-  font-style: normal;
+    font-family: "Lato", serif, sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
-/* Contenedor principal */
-div.contenedor-padre {
+/* Contenedor padre */
+.contenedor-padre {
     background: linear-gradient(#606c3886, #90b067);
     display: flex;
     flex-direction: column;
@@ -31,18 +40,8 @@ div.contenedor-padre {
     border-radius: 20px;
     box-sizing: border-box;
     margin: 20px auto;
-    height: 90vh; /* Para que ocupe casi toda la altura de pantalla */
-    justify-content: space-between; /* Deja el botón fijo abajo */
-}
-
-/* Contenedor interno */
-.contenedor {
-    flex-grow: 1;
-    overflow-y: auto; /* Permite scroll en inputs si se necesita */
-    padding: 20px;
-    background: rgba(222, 222, 222, 0.176);
-    border-radius: 20px;
-    margin-bottom: 20px;
+    height: auto; /* Altura automática según contenido */
+    justify-content: flex-start; /* Empieza desde arriba */
 }
 
 /* Encabezado */
@@ -54,15 +53,34 @@ div.contenedor-padre {
     padding: 15px;
 }
 
+.profile-header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Contenedor interno del formulario */
+.contenedor {
+    flex-grow: 0; /* No fuerza altura */
+    overflow: visible; /* No scroll interno */
+    padding: 20px;
+    background: rgba(222, 222, 222, 0.176);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 /* Filas del formulario */
 .form-row {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    gap: 5px;
 }
 
 .form-row label {
     font-weight: bold;
+    color: #555;
     margin-bottom: 5px;
 }
 
@@ -71,9 +89,10 @@ div.contenedor-padre {
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
+    font-size: 14px;
 }
 
-/* Botón fijo al final */
+/* Contenedor del botón */
 .button-container {
     display: flex;
     justify-content: center;
@@ -95,4 +114,11 @@ div.contenedor-padre {
 
 .button-container input:hover {
     background-color: #dda15e;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .contenedor-padre {
+        width: 90%;
+    }
 }
