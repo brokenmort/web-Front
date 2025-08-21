@@ -25,7 +25,7 @@ form.addEventListener("submit", async (e) => {
     if (response.ok) {
       sessionStorage.setItem("resetEmail", email);
       showMessage("✅ Te enviamos un código de verificación a tu correo", "green");
-      setTimeout(() => { window.location.href = "code.html"; }, 1500);
+      setTimeout(() => { window.location.href = "verify-code.html"; }, 1500);
     } else {
       showMessage("❌ " + (data.detail || data.error || "Error enviando correo"), "red");
     }
