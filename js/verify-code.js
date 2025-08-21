@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("resetToken", token);
         messageDiv.style.color = "green";
         messageDiv.textContent = "✅ Código verificado. Redirigiendo...";
-        setTimeout(() => { window.location.href = "newPassword.html"; }, 1500);
+        setTimeout(() => { window.location.href = "new-password.html"; }, 1500);
       } else {
         messageDiv.style.color = "red";
         messageDiv.textContent = "❌ Código inválido o expirado";
