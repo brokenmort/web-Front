@@ -30,6 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn.addEventListener("click", () => {
     sessionStorage.removeItem("authToken");
     sessionStorage.removeItem("firstName");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   });
 });
