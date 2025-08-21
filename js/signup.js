@@ -1,53 +1,53 @@
-const API_URL = "https://pagina-web-finansas-b6474cfcee14.herokuapp.com/api/auth/register/";
-
-document.getElementById("signup-btn").addEventListener("click", async () => {
-    const email = document.getElementById("email").value.trim();
-    const first_name = document.getElementById("first_name").value.trim();
-    const last_name = document.getElementById("last_name").value.trim();
+document.getElementById("signup-btn").addEventListener("click", async function () {
+    const email = document.getElementById("email").value;
+    const firstName = document.getElementById("firstname").value;
+    const lastName = document.getElementById("lastname").value;
     const birthday = document.getElementById("birthday").value;
-    const phone = document.getElementById("phone").value.trim();
-    const country = document.getElementById("country").value.trim();
+    const phone = document.getElementById("phone").value;
+    const country = document.getElementById("country").value;
     const password = document.getElementById("password").value;
-    const confirm_password = document.getElementById("confirm_password").value;
-
-    const messageDiv = document.getElementById("message");
+    const confirmPassword = document.getElementById("confirm-password").value;
 
     // Validación básica
-    if (!email || !first_name || !last_name || !birthday || !phone || !country || !password || !confirm_password) {
-        messageDiv.style.color = "red";
-        messageDiv.textContent = "Todos los campos son obligatorios.";
+    if (!email || !birthday || !phone || !country || !password || !confirmPassword) {
+        alert("Por favor completa todos los campos obligatorios.");
         return;
     }
 
-    if (password !== confirm_password) {
-        messageDiv.style.color = "red";
-        messageDiv.textContent = "❌ Las contraseñas no coinciden.";
+    if (password !== confirmPassword) {
+        alert("Las contraseñas no coinciden.");
         return;
     }
 
-    messageDiv.style.color = "black";
-    messageDiv.textContent = "Registrando usuario...";
+    // Objeto de datos requerido por la API
+    const data = {
+        email: email,
+        password: password,
+        birthday: birthday,
+        phone: phone,
+        country: country,
+        first_name: firstName || "",
+        last_name: lastName || ""
+    };
 
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch("https://pagina-web-finansas-b6474cfcee14.herokuapp.com/api/auth/register/", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, first_name, last_name, birthday, phone, country, password })
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         });
 
-        const data = await response.json();
-
         if (response.ok) {
-            messageDiv.style.color = "green";
-            messageDiv.textContent = "✅ Cuenta creada con éxito. Redirigiendo a login...";
-            setTimeout(() => { window.location.href = "login.html"; }, 1500);
+            alert("Cuenta creada con éxito. Serás redirigido al login.");
+            window.location.href = "index.html";
         } else {
-            messageDiv.style.color = "red";
-            messageDiv.textContent = "❌ " + (data.detail || data.error || "Error creando cuenta");
+            const errorData = await response.json();
+            alert("Error: " + JSON.stringify(errorData));
         }
-
-    } catch (err) {
-        messageDiv.style.color = "red";
-        messageDiv.textContent = "❌ Error de conexión: " + err.message;
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+        alert("Error en la conexión con el servidor.");
     }
 });

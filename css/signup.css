@@ -1,13 +1,4 @@
-/* Reset y box-sizing */
-html {
-    height: 100%;
-    box-sizing: border-box;
-}
-*, *::before, *::after {
-    box-sizing: inherit;
-}
-
-body {
+body{
     margin: 0;
     padding: 0;
     width: 100vw;
@@ -24,46 +15,8 @@ body {
     background-position: right;
     background-attachment: fixed;
     font-family: "Lato", serif, sans-serif; 
-    font-weight: 500;
-    font-style: normal;
-}
-
-/* Barra superior */
-.top-bar {
-    position: absolute;
-    top: 5px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 10;
-}
-
-.backArrow {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.home-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 2em;
-    color: #90b067;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.backArrow:hover,
-.home-icon:hover {
-    transform: scale(1.5);
-    transition: transform 0.5s ease;
+  font-weight: 500;
+  font-style: normal;
 }
 
 /* Contenedor principal */
@@ -71,103 +24,75 @@ div.contenedor-padre {
     background: linear-gradient(#606c3886, #90b067);
     display: flex;
     flex-direction: column;
-    max-width: 1000px;
-    width: 100vw;
+    max-width: 450px;
+    width: 90vw;
     min-width: 300px;
-    padding: 10px 30px;
+    padding: 20px;
     border-radius: 20px;
     box-sizing: border-box;
-    min-height: 300px;
-    max-height: 620px;
-    margin: 10px auto;
-    overflow: hidden;
+    margin: 20px auto;
+    height: 90vh; /* Para que ocupe casi toda la altura de pantalla */
+    justify-content: space-between; /* Deja el botón fijo abajo */
 }
 
+/* Contenedor interno */
 .contenedor {
-    margin: auto;
-    width: 100%;
-    padding: 20px 30px;
+    flex-grow: 1;
+    overflow-y: auto; /* Permite scroll en inputs si se necesita */
+    padding: 20px;
     background: rgba(222, 222, 222, 0.176);
-    border-radius: 50px;
-    max-width: 90%;
-    box-sizing: border-box;
-    box-shadow: 0px 10px 3px 10px rgba(1, 1, 1, 0.1);
-    overflow: hidden;
-    max-height: 600px;
+    border-radius: 20px;
+    margin-bottom: 20px;
 }
 
-/* Encabezado del formulario */
+/* Encabezado */
 .profile-header {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     background-color: rgba(222, 222, 222, 0.176);
-    border-radius: 50px;
-    padding-bottom: 20px;
-    height: auto;
+    border-radius: 20px;
+    padding: 15px;
 }
 
 /* Filas del formulario */
 .form-row {
-    box-sizing: border-box;
-    padding-top: 15px;
-    padding-right: 15px;
     display: flex;
-    align-items: center;
-    gap: 5px;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
-label {
-    display: block;
-    width: 50%;
-    box-sizing: border-box;
-}
-
-input.profile-input {
-    display: block;
-    width: 100%;
-    padding: 18px 0;
-    color: #767676;
+.form-row label {
     font-weight: bold;
-    background-color: rgba(222, 222, 222, 0.3);
-    border: none;
-    margin: 0px;
-    text-align: center;
-    box-shadow: 0px 5px 3px 5px rgba(1, 1, 1, 0.1);
-    border-radius: 100px;
+    margin-bottom: 5px;
 }
 
-input.profile-input::placeholder {
-    color: #767676;
-    opacity: 1;   
+.form-row input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
 }
 
-.contenedor h1 {
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-/* Botones */
-.contenedor .button {
+/* Botón fijo al final */
+.button-container {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    gap: 10px;
+    padding: 10px 0;
 }
 
-.contenedor .button input {
-    width: 50%;
-    border-radius: 500px;
-    padding: 15px 15px;
-    margin: 10px auto;
+.button-container input {
+    width: 70%;
+    border-radius: 50px;
+    padding: 15px 0;
     background-color: #a26127;
     color: #fefae0;
     border: none;
     cursor: pointer;
     box-shadow: 0px 5px 3px 3px rgba(1, 1, 1, 0.1);
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-.contenedor .button input:hover {
+.button-container input:hover {
     background-color: #dda15e;
-    transition: 0.3s;
 }
