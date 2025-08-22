@@ -2,7 +2,7 @@
 
 /* Contenedor padre */
 div.contenedor-padre {
-    background: linear-gradient(#606c38, #90b067);
+    background: linear-gradient(#606c38b2, #90b067ad);
     display: flex;
     flex-direction: column;
     width: 30vw;           /* Ancho en pantallas grandes */
