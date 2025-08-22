@@ -2,7 +2,7 @@
 
 /* Contenedor padre */
 div.contenedor-padre {
-    background: linear-gradient(#606c38b2, #90b067ad);
+    background: linear-gradient(#606c38b2, #90b067ad); /* Fondo degradado */
     display: flex;
     flex-direction: column;
     width: 30vw;           /* Ancho en pantallas grandes */
@@ -96,29 +96,43 @@ div.contenedor-padre {
 /* Media queries para pantallas pequeñas */
 @media (max-width: 768px) {
     html, body {
-        overflow-x: hidden; /* Evita scroll horizontal */
-        width: 100vw;       /* Asegura que el viewport sea exacto */
+        overflow: hidden; /* Evita scroll horizontal y vertical */
+        width: 100vw;     
+        height: 100vh;    
+        margin: 0;
+        padding: 0;
     }
 
     div.contenedor-padre {
         width: 95vw;          /* Ajusta ancho al viewport móvil */
         max-width: 95vw;      /* Nunca excede el ancho de la pantalla */
-        height: auto;         /* Crece según contenido */
-        padding: 20px;        /* Padding más pequeño para móvil */
+        height: 100vh;        /* Ajusta exactamente al alto del viewport */
+        padding: 15px;        /* Padding más pequeño para móvil */
         border-radius: 25px;  /* Bordes redondeados */
-        margin: 20px auto;    /* Centrado horizontal */
-        overflow-x: hidden;   /* Refuerzo: no permite scroll horizontal */
+        margin: 0 auto;       /* Centrado horizontal */
+        display: flex;
+        justify-content: center; /* Centrado vertical */
+        align-items: center;     /* Centrado horizontal */
+        overflow: hidden;        /* Evita scroll horizontal y vertical */
     }
 
     .contenedor {
         width: 100%;          /* Ocupa todo el ancho disponible */
-        padding: 15px;        /* Padding reducido en móvil */
+        max-width: 350px;     /* Limita ancho máximo */
+        padding: 15px;        /* Padding interno reducido */
         border-radius: 25px;
         box-shadow: 0px 5px 3px 3px rgba(1, 1, 1, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centrado vertical dentro del padre */
+        align-items: center;     /* Centrado horizontal */
+        height: auto;            /* Se adapta al contenido */
+        overflow: hidden;        /* Evita que los elementos se salgan */
+        gap: 12px;               /* Espacio proporcional */
     }
 
     .contenedor .credentials label {
-        max-width: 100%;      /* Se ajusta al ancho del contenedor */
+        max-width: 100%;      /* Ajusta labels al ancho del contenedor */
         font-size: 14px;      /* Texto más pequeño */
         text-align: left;
         margin-bottom: 5px;
