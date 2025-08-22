@@ -7,7 +7,7 @@ body{
     padding: 0;
     width: 100vw;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Evita scroll horizontal */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,9 +19,11 @@ body{
     background-position: right;
     background-attachment: fixed;
     font-family: "Lato", serif, sans-serif; 
-  font-weight: 500;
-  font-style: normal;
+    font-weight: 500;
+    font-style: normal;
 }
+
+/* Barra superior con botones Back y Home */
 .top-bar {
     position: absolute;
     top: 5px;
@@ -31,7 +33,7 @@ body{
     gap: 10px;
     z-index: 10;
 }
-.backArrow{
+.backArrow, .home-icon {
     width: 40px;
     height: 40px;
     display: flex;
@@ -40,14 +42,8 @@ body{
     cursor: pointer;
 }
 .home-icon {
-    width: 40px;
-    height: 40px;
     font-size: 2em;
     color: #90b067;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
     text-decoration: none;
 }
 .backArrow:hover,
@@ -55,55 +51,61 @@ body{
     transform: scale(1.5);
     transition: transform 0.5s ease;
 }
+
+/* Botón Admin */
 .admin {
     position: absolute;
-    display: flex;
-    align-items: center;
     top: 5px;
     right: 20px;
+    display: flex;
+    align-items: center;
     color: #90b067;
     cursor: pointer;
 }
 .admin-button {
     width: 100px;
     height: 40px;
-   border-radius: 500px;
-   padding: 0;
-   margin: 0;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   background-color: #a26127;
-   color: #fefae0;
-   border: none;
-   cursor: pointer;
-   box-sizing: border-box;
+    border-radius: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a26127;
+    color: #fefae0;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
 }
 .admin-button:hover {
     background-color: #dda15e;
     transition: 0.3s;
 }
+
+/* Username container */
 .username {
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     gap: 10px;
+    box-sizing: border-box;
 }
+
+/* Contenedor principal */
 div.contenedor-padre{
     background: linear-gradient(#606c3886, #90b067);
     display: flex;
     flex-direction: column;
-    max-width: 1000px;
-    width: 100vw;
+    max-width: 1000px;      /* Máximo ancho en escritorio */
+    width: 100vw;            /* Ajusta al ancho del viewport */
     min-width: 300px;
     padding: 10px 30px;
     border-radius: 20px;
     box-sizing: border-box;
     min-height: 300px;
     max-height: 620px;
-    margin: 10px auto;
+    margin: 10px auto;       /* Centrado horizontal */
     overflow: hidden;
 }
+
+/* Contenedor interno */
 .contenedor{
     margin: auto;
     width: 100%;
@@ -116,24 +118,27 @@ div.contenedor-padre{
     overflow: hidden;
     max-height: 600px;
 }
+
+/* Header del perfil */
 .profile-header {
     text-align: center;
     margin-bottom: 10px;
-    background-color: rgb(222, 222, 222, 0.176);
+    background-color: rgba(222, 222, 222, 0.176);
     border-radius: 50px;
     padding-bottom: 20px;
     height: auto;
-    margin-bottom: 10px;
     box-sizing: border-box;
     max-height: 600px;
 }
+
+/* Formulario dentro de profile-header */
 .form-row {
-    box-sizing: border-box;
-    padding-top: 15px;
-    padding-right: 15px;
     display: flex;
     align-items: center;
-    gap: 5px; /* space between label and input */
+    gap: 5px;          /* Espacio entre label e input */
+    padding-top: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
 }
 .contenedor .form-row input:focus{
     outline: none;
@@ -141,6 +146,8 @@ div.contenedor-padre{
     background-color: rgba(222, 222, 222, 0.45);
     color: #fefae0;
 }
+
+/* Etiquetas y inputs */
 label{
     display: block;
     width: 50%;
@@ -154,7 +161,7 @@ input{
     font-weight: bold;
     background-color: rgba(222, 222, 222, 0.3);
     border: none;
-    margin:0px 0px;
+    margin: 0;
     text-align: center;
     box-shadow: 0px 5px 3px 5px rgba(1, 1, 1, 0.1);
     border-radius: 100px;
@@ -164,37 +171,57 @@ input::placeholder{
     color: #767676;
     opacity: 1;   
 }
+
+/* Titulos dentro de contenedor */
 .contenedor h1{
     margin-top: 0;
     margin-bottom: 20px;
 }
+
+/* Botones dentro de contenedor */
 .contenedor .button input{
-   width: 50%;
-   border-radius: 500px;
-   padding: 15px 15px;
-   margin: 10px auto;
-   background-color: #a26127;
-   color: #fefae0;
-   border: none;
-   cursor: pointer;
-   box-shadow: 0px 5px 3px 3px rgba(1, 1, 1, 0.1);
+    width: 50%;
+    border-radius: 500px;
+    padding: 15px 15px;
+    margin: 10px auto;
+    background-color: #a26127;
+    color: #fefae0;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 5px 3px 3px rgba(1, 1, 1, 0.1);
 }
 .button {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap; /* Permite que botones no se superpongan en pantallas pequeñas */
 }
 .contenedor .button input:hover{
     background-color: #dda15e;
     transition: 0.3s;
 }
+
+/* Botón Edit Profile (ajustado para que texto se vea completo) */
 #edit-btn {
-    margin: 0 auto;    display: block;
-    margin: 10px auto;
+    display: block;
+    width: 50%;             /* Ancho suficiente para leer el texto */
+    padding: 15px 15px;     /* Padding adecuado */
+    margin: 10px auto;      /* Centrado horizontal */
+    border-radius: 500px;
+    background-color: #a26127;
+    color: #fefae0;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 5px 3px 3px rgba(1,1,1,0.1);
+    text-align: center;
+}
+#edit-btn:hover {
+    background-color: #dda15e;
+    transition: 0.3s;
 }
 
+/* Botones Save y Cancel */
 #save-btn,
 #cancel-btn {
     display: inline-block;
@@ -202,47 +229,73 @@ input::placeholder{
     margin: 0 30px 0 40px;
     padding: 15px 40px;
 }
-/* Modal background */
+
+/* Modal */
 .modal {
-  display: none; /* hidden by default */
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
 }
-
-/* Modal box */
 .modal-content {
-  background: #fff;
-  padding: 20px 30px;
-  border-radius: 15px;
-  text-align: center;
-  width: 300px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
 }
-
 .modal-content p {
-  font-size: 1.1em;
-  margin-bottom: 20px;
+    font-size: 1.1em;
+    margin-bottom: 20px;
 }
-
 .modal-content button {
-  padding: 10px 20px;
-  margin: 0 5px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background-color: #a26127;
-  color: white;
-  font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #a26127;
+    color: white;
+    font-weight: bold;
 }
-
 .modal-content button:hover {
-  background-color: #dda15e;
+    background-color: #dda15e;
 }
 
+/* Media queries para móviles */
+@media (max-width: 768px){
+    body{
+        overflow-x: hidden; /* No scroll horizontal */
+    }
+    div.contenedor-padre{
+        width: 95vw;         /* Ajusta al ancho de la pantalla móvil */
+        max-width: 95vw;
+        padding: 20px;
+        border-radius: 25px;
+        margin: 10px auto;
+        max-height: none;    /* Permite que crezca según contenido */
+    }
+    .contenedor{
+        width: 100%;
+        padding: 15px;
+        border-radius: 25px;
+        max-height: none;
+    }
+    #edit-btn{
+        width: 80%;           /* Aumenta ancho en móvil para no cortar texto */
+        padding: 12px;
+    }
+    #save-btn,
+    #cancel-btn{
+        width: 45%;
+        margin: 5px;
+        padding: 12px 20px;
+    }
+}
