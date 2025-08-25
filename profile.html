@@ -6,28 +6,9 @@
   <title>Profile</title>
   <link rel="stylesheet" href="css/profile.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <style>
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    #save-btn, #cancel-btn { display: none; margin-left: 5px; }
-  </style>
 </head>
 <body>
-  <!-- Confirm Changes Modal -->
+  <!-- Modal confirmación -->
   <div id="confirmModal" class="modal">
     <div class="modal-content">
       <p>¿Deseas confirmar los cambios?</p>
@@ -36,7 +17,7 @@
     </div>
   </div>
 
-  <!-- Success Modal -->
+  <!-- Modal éxito -->
   <div id="successModal" class="modal">
     <div class="modal-content">
       <p>¡Los cambios se guardaron correctamente!</p>
@@ -44,41 +25,51 @@
     </div>
   </div>
 
-  <div class="top-bar">
-    <img src="icons/backArrow.png" alt="Back" class="backArrow" onclick="history.back()">
-    <a href="home.html" class="home-icon">
-      <i class="bi bi-house-fill"></i>
-    </a>
-  </div>
-
+  <!-- Contenedor principal -->
   <div class="contenedor-padre">
     <div class="contenedor">
+      <!-- Username y foto -->
       <div class="username">
-        <i class="bi bi-person-circle"></i>
-        <h1 id="displayName">PROFILE</h1>
-      </div>
+    <!-- Imagen de perfil -->
+    <div class="profile-image-preview" id="profileImagePreview">
+        <i class="bi bi-person" id="profileIcon"></i>
+        <img id="profileImage">
+    </div>
 
+    <!-- Contenedor de nombre y botón -->
+    <div class="profile-info">
+        <h1 id="displayName">PROFILE</h1>
+        <label for="profile_image" class="custom-file-upload">
+            <i class="bi bi-camera"></i> Select Photo
+        </label>
+        <input type="file" id="profile_image" name="profile_image" accept="image/*">
+    </div>
+</div>
+
+
+      <!-- Formulario de perfil -->
       <div class="profile-header">
         <div class="form-row"><label for="email">Email:</label>
-          <input class="profile-input" type="email" id="email" disabled />
+          <input class="profile-input" type="email" id="email" disabled/>
         </div>
         <div class="form-row"><label for="first_name">Name:</label>
-          <input class="profile-input" type="text" id="first_name" disabled />
+          <input class="profile-input" type="text" id="first_name" disabled/>
         </div>
         <div class="form-row"><label for="last_name">Last Name:</label>
-          <input class="profile-input" type="text" id="last_name" disabled />
+          <input class="profile-input" type="text" id="last_name" disabled/>
         </div>
         <div class="form-row"><label for="birthday">Date of Birth:</label>
-          <input class="profile-input" type="date" id="birthday" disabled />
+          <input class="profile-input" type="date" id="birthday" disabled/>
         </div>
-        <div class="form-row"><label for="phone">Phone Number:</label>
-          <input class="profile-input" type="tel" id="phone" disabled />
+        <div class="form-row"><label for="phone">Phone:</label>
+          <input class="profile-input" type="tel" id="phone" disabled/>
         </div>
         <div class="form-row"><label for="country">Country:</label>
-          <input class="profile-input" type="text" id="country" disabled />
+          <input class="profile-input" type="text" id="country" disabled/>
         </div>
       </div>
 
+      <!-- Botones -->
       <div class="button">
         <input type="button" value="Edit Profile" id="edit-btn">
         <input type="button" value="Save" id="save-btn">
@@ -87,6 +78,135 @@
     </div>
   </div>
 
-  <script src="js/profile.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const token = sessionStorage.getItem("authToken");
+      if (!token) return window.location.href = "index.html";
+
+      const inputs = document.querySelectorAll('.profile-input');
+      const editBtn = document.getElementById('edit-btn');
+      const saveBtn = document.getElementById('save-btn');
+      const cancelBtn = document.getElementById('cancel-btn');
+
+      const profileImageInput = document.getElementById('profile_image');
+      const profileImage = document.getElementById('profileImage');
+      const profileIcon = document.getElementById('profileIcon');
+
+      const confirmModal = document.getElementById('confirmModal');
+      const successModal = document.getElementById('successModal');
+      const confirmChangesBtn = document.getElementById('confirmChangesBtn');
+      const cancelChangesBtn = document.getElementById('cancelChangesBtn');
+      const successOkBtn = document.getElementById('successOkBtn');
+
+      let originalValues = {};
+      let profileImageFile = null;
+
+      // 🔹 Cargar perfil
+      const loadProfile = async () => {
+        try {
+          const res = await fetch("https://pagina-web-finansas-b6474cfcee14.herokuapp.com/api/auth/me/", {
+            method: "GET",
+            headers: {"Content-Type":"application/json", "Authorization":"Bearer "+token}
+          });
+          if(!res.ok) throw new Error("No autorizado");
+          const data = await res.json();
+          document.getElementById("displayName").textContent = data.first_name;
+
+          Object.keys(data).forEach(key=>{
+            const input = document.getElementById(key);
+            if(input) input.value = data[key];
+          });
+
+          // 🔹 Imagen de perfil
+          if(data.profile_image){
+            profileImage.src = data.profile_image;
+            profileImage.style.display = 'block';
+            profileIcon.style.display = 'none';
+          }
+        } catch(err) {
+          alert("❌ No se pudieron cargar los datos: "+err.message);
+        }
+      };
+      loadProfile();
+
+      // 🔹 Seleccionar foto
+      profileImageInput.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if(file){
+          profileImageFile = file;
+          const reader = new FileReader();
+          reader.onload = e => {
+            profileImage.src = e.target.result;
+            profileImage.style.display = 'block';
+            profileIcon.style.display = 'none';
+          }
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // 🔹 Editar perfil
+      editBtn.onclick = () => {
+        inputs.forEach(input => { 
+          originalValues[input.id] = input.value;
+          input.disabled = false;
+        });
+        editBtn.style.display = 'none';
+        saveBtn.style.display = 'inline-block';
+        cancelBtn.style.display = 'inline-block';
+      };
+
+      // 🔹 Guardar cambios - abrir modal
+      saveBtn.onclick = () => confirmModal.style.display = 'flex';
+
+      // 🔹 Confirmar cambios
+      confirmChangesBtn.onclick = async () => {
+        const formData = new FormData();
+        inputs.forEach(input => formData.append(input.id, input.value));
+        if(profileImageFile) formData.append('profile_image', profileImageFile);
+
+        try {
+          const res = await fetch("https://pagina-web-finansas-b6474cfcee14.herokuapp.com/api/auth/me/", {
+            method: "PUT",
+            headers: {"Authorization":"Bearer "+token},
+            body: formData
+          });
+          if(!res.ok) throw new Error("Error al guardar cambios");
+          const data = await res.json();
+          inputs.forEach(input => input.disabled = true);
+          document.getElementById("displayName").textContent = data.first_name;
+          confirmModal.style.display = 'none';
+          successModal.style.display = 'flex';
+        } catch(err) {
+          alert("❌ "+err.message);
+          confirmModal.style.display = 'none';
+        }
+      };
+
+      cancelChangesBtn.onclick = () => confirmModal.style.display = 'none';
+      successOkBtn.onclick = () => {
+        successModal.style.display = 'none';
+        saveBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        editBtn.style.display = 'inline-block';
+      };
+
+      // 🔹 Cancelar edición
+      cancelBtn.onclick = () => {
+        inputs.forEach(input => {
+          input.value = originalValues[input.id];
+          input.disabled = true;
+        });
+        if(profileImageFile){
+          profileImageFile = null;
+          profileImage.style.display = 'none';
+          profileIcon.style.display = 'block';
+          profileImageInput.value = '';
+        }
+        saveBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        editBtn.style.display = 'inline-block';
+      };
+    });
+  </script>
 </body>
 </html>

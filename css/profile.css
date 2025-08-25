@@ -1,301 +1,167 @@
-html{
+/* 🔹 Reset general */
+html, body {
     height: 100%;
-    box-sizing: border-box;
-}
-body{
     margin: 0;
     padding: 0;
-    width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden; /* Evita scroll horizontal */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family: "Lato", sans-serif;
     background-image: url(../image/background.jpg);
     background-color: rgb(197, 195, 195);
     background-blend-mode: multiply;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: right;
-    background-attachment: fixed;
-    font-family: "Lato", serif, sans-serif; 
-    font-weight: 500;
-    font-style: normal;
+    background-position: center;
+    overflow-x: hidden;
 }
 
-/* Barra superior con botones Back y Home */
-.top-bar {
-    position: absolute;
-    top: 5px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 10;
-}
-.backArrow, .home-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-.home-icon {
-    font-size: 2em;
-    color: #90b067;
-    text-decoration: none;
-}
-.backArrow:hover,
-.home-icon:hover {
-    transform: scale(1.5);
-    transition: transform 0.5s ease;
-}
-
-/* Botón Admin */
-.admin {
-    position: absolute;
-    top: 5px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    color: #90b067;
-    cursor: pointer;
-}
-.admin-button {
-    width: 100px;
-    height: 40px;
-    border-radius: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #a26127;
-    color: #fefae0;
-    border: none;
-    cursor: pointer;
-    box-sizing: border-box;
-}
-.admin-button:hover {
-    background-color: #dda15e;
-    transition: 0.3s;
-}
-
-/* Username container */
-.username {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-sizing: border-box;
-}
-
-/* Contenedor principal */
-div.contenedor-padre{
+/* 🔹 Contenedor principal */
+.contenedor-padre {
     background: linear-gradient(#606c3886, #90b067);
     display: flex;
     flex-direction: column;
-    max-width: 1000px;      /* Máximo ancho en escritorio */
-    width: 100vw;            /* Ajusta al ancho del viewport */
+    width: 100%;
+    max-width: 1000px;
     min-width: 300px;
-    padding: 10px 30px;
+    padding: 20px 30px;
     border-radius: 20px;
+    margin: 20px auto;
     box-sizing: border-box;
-    min-height: 300px;
-    max-height: 620px;
-    margin: 10px auto;       /* Centrado horizontal */
-    overflow: hidden;
 }
 
-/* Contenedor interno */
-.contenedor{
-    margin: auto;
+/* 🔹 Contenedor interno */
+.contenedor {
     width: 100%;
-    padding: 20px 30px 10px 30px;
     background: rgba(222, 222, 222, 0.176);
     border-radius: 50px;
-    max-width: 90%;
-    box-sizing: border-box;
-    box-shadow: 0px 10px 3px 10px rgba(1, 1, 1, 0.1);
-    overflow: hidden;
-    max-height: 600px;
+    padding: 30px;
+    box-shadow: 0px 10px 15px rgba(1,1,1,0.1);
 }
 
-/* Header del perfil */
-.profile-header {
-    text-align: center;
-    margin-bottom: 10px;
-    background-color: rgba(222, 222, 222, 0.176);
-    border-radius: 50px;
-    padding-bottom: 20px;
-    height: auto;
-    box-sizing: border-box;
-    max-height: 600px;
-}
-
-/* Formulario dentro de profile-header */
-.form-row {
+/* 🔹 Username: imagen + nombre + botón */
+.username {
     display: flex;
-    align-items: center;
-    gap: 5px;          /* Espacio entre label e input */
-    padding-top: 15px;
-    padding-right: 15px;
-    box-sizing: border-box;
-}
-.contenedor .form-row input:focus{
-    outline: none;
-    box-shadow: 0px 5px 3px 5px rgba(1, 1, 1, 0.2);
-    background-color: rgba(222, 222, 222, 0.45);
-    color: #fefae0;
-}
-
-/* Etiquetas y inputs */
-label{
-    display: block;
-    width: 50%;
-    box-sizing: border-box;
-}
-input{
-    display: block;
-    width: 100%;
-    padding: 18px 0px;
-    color: #767676;
-    font-weight: bold;
-    background-color: rgba(222, 222, 222, 0.3);
-    border: none;
-    margin: 0;
-    text-align: center;
-    box-shadow: 0px 5px 3px 5px rgba(1, 1, 1, 0.1);
-    border-radius: 100px;
-    box-sizing: border-box;
-}
-input::placeholder{
-    color: #767676;
-    opacity: 1;   
-}
-
-/* Titulos dentro de contenedor */
-.contenedor h1{
-    margin-top: 0;
+    flex-direction: row;
+    align-items: flex-start; /* Imagen y texto alineados arriba */
+    gap: 20px;
     margin-bottom: 20px;
 }
 
-/* Botones dentro de contenedor */
-.contenedor .button input{
-    width: 50%;
-    border-radius: 500px;
-    padding: 15px 15px;
-    margin: 10px auto;
-    background-color: #a26127;
-    color: #fefae0;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0px 5px 3px 3px rgba(1, 1, 1, 0.1);
+/* 🔹 Imagen de perfil */
+.profile-image-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #a26127;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 3em;
+    color: #a26127;
+    flex-shrink: 0;
 }
+#profileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: none;
+}
+
+/* 🔹 Contenedor de texto y botón al lado de la imagen */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* alineado a la izquierda */
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 🔹 Nombre de usuario */
+#displayName {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* 🔹 Botón Select Photo */
+.custom-file-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #a26127;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.custom-file-upload:hover { background-color: #dda15e; }
+input[type="file"] { display: none; }
+
+/* 🔹 Formulario de perfil */
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.form-row label { width: 40%; }
+.form-row input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 50px;
+    border: none;
+    text-align: center;
+    box-shadow: 0px 5px 3px rgba(0,0,0,0.1);
+    background-color: rgba(222,222,222,0.3);
+}
+
+/* 🔹 Botones de acción */
 .button {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 10px;
-    flex-wrap: wrap; /* Permite que botones no se superpongan en pantallas pequeñas */
+    flex-wrap: wrap;
 }
-.contenedor .button input:hover{
-    background-color: #dda15e;
-    transition: 0.3s;
-}
-
-/* Botón Edit Profile (ajustado para que texto se vea completo) */
-#edit-btn {
-    display: block;
-    width: 50%;             /* Ancho suficiente para leer el texto */
-    padding: 15px 15px;     /* Padding adecuado */
-    margin: 10px auto;      /* Centrado horizontal */
-    border-radius: 500px;
+#edit-btn, #save-btn, #cancel-btn {
+    padding: 12px 25px;
+    border-radius: 50px;
     background-color: #a26127;
     color: #fefae0;
     border: none;
     cursor: pointer;
-    box-shadow: 0px 5px 3px 3px rgba(1,1,1,0.1);
-    text-align: center;
+    font-size: 16px;
 }
-#edit-btn:hover {
-    background-color: #dda15e;
-    transition: 0.3s;
-}
+#edit-btn:hover, #save-btn:hover, #cancel-btn:hover { background-color: #dda15e; }
 
-/* Botones Save y Cancel */
-#save-btn,
-#cancel-btn {
-    display: inline-block;
-    width: 40%;
-    margin: 0 30px 0 40px;
-    padding: 15px 40px;
-}
-
-/* Modal */
+/* 🔹 Modal */
 .modal {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    top:0; left:0;
+    width:100%; height:100%;
     background-color: rgba(0,0,0,0.6);
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 .modal-content {
     background: #fff;
-    padding: 20px 30px;
+    padding: 20px;
     border-radius: 15px;
     text-align: center;
     width: 300px;
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
-}
-.modal-content p {
-    font-size: 1.1em;
-    margin-bottom: 20px;
-}
-.modal-content button {
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    background-color: #a26127;
-    color: white;
-    font-weight: bold;
-}
-.modal-content button:hover {
-    background-color: #dda15e;
 }
 
-/* Media queries para móviles */
-@media (max-width: 768px){
-    body{
-        overflow-x: hidden; /* No scroll horizontal */
-    }
-    div.contenedor-padre{
-        width: 95vw;         /* Ajusta al ancho de la pantalla móvil */
-        max-width: 95vw;
-        padding: 20px;
-        border-radius: 25px;
-        margin: 10px auto;
-        max-height: none;    /* Permite que crezca según contenido */
-    }
-    .contenedor{
-        width: 100%;
-        padding: 15px;
-        border-radius: 25px;
-        max-height: none;
-    }
-    #edit-btn{
-        width: 80%;           /* Aumenta ancho en móvil para no cortar texto */
-        padding: 12px;
-    }
-    #save-btn,
-    #cancel-btn{
-        width: 45%;
-        margin: 5px;
-        padding: 12px 20px;
-    }
+/* 🔹 Responsive */
+@media (max-width: 768px) {
+    .username { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .profile-image-preview { width: 100px; height: 100px; }
 }
